@@ -1,0 +1,21 @@
+global:
+  name: consul
+  datacenter: localdc1
+  image: hashicorp/consul:1.9.4
+
+server:
+  replicas: 1
+
+ui:
+  enabled: true
+controller:
+  enabled: true
+
+connectInject:
+  enabled: true
+  default: true
+
+syncCatalog:
+  enabled: true
+  toConsul: true
+  toK8S: false

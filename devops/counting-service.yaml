@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: counting
+  namespace: dev
+spec:
+  selector:
+    app: counting
+  ports:
+    - name: http
+      protocol: TCP
+      port: 9001
+      targetPort: 9001
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: counting
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: counting
+      app: counting
+  template:
+    metadata:
+      labels:
+        service: counting
+        app: counting
+      annotations:
+        consul.hashicorp.com/connect-inject: "true"
+        consul.hashicorp.com/connect-service-upstreams: "dashboard:9002"
+    spec:
+      containers:
+      - name: counting
+        image: hashicorp/counting-service:0.0.2
+        ports:
+          - containerPort: 9001
