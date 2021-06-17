@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: dev
+  labels:
+    app: seatastorage
+  name: seatastorage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seatastorage
+      env: dev
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: seatastorage
+        env: dev
+    spec:
+      containers:
+      - image: pjhu/storage:1.0
+        env:
+          - name: MYSQL_HOST
+            value: mysql
+        name: seatastorage
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: dev
+  labels:
+    app: seatastorage
+    env: dev
+  name: seatastorage
+spec:
+  ports:
+  - name: seatastorage
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: seatastorage
+    env: dev
+  type: ClusterIP

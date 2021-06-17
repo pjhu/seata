@@ -117,3 +117,12 @@ k port-forward service/dashboard 9002:9002 -n dev
 CREATE DATABASE `account` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 CREATE DATABASE `account_order` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 CREATE DATABASE `storage` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+
+# 创建image
+执行account / order /storage项目下的ci
+
+# 部署服务
+```
+cd decvops/cicd
+```

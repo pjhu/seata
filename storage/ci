@@ -1,0 +1,6 @@
+#!/bin/sh
+
+./gradlew -s clean bootJar
+
+docker build --build-arg jarName=build/libs/storage-1.0.jar -t pjhu/storage:1.0 .
+docker push pjhu/storage:1.0

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+./gradlew -s clean bootJar
+
+docker build --build-arg jarName=build/libs/account-1.0.jar -t pjhu/account:1.0 .
+docker push pjhu/account:1.0

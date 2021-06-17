@@ -2,30 +2,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: dev
-  annotations:
-    deployment.kubernetes.io/revision: "1"
   labels:
-    app: seataaccount
-  name: seataaccount
+    app: seataorder
+  name: seataorder
 spec:
-  progressDeadlineSeconds: 600
   replicas: 1
   selector:
     matchLabels:
-      app: seataaccount
+      app: seataorder
       env: dev
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: seataaccount
+        app: seataorder
         env: dev
     spec:
-      imagePullSecrets:
-      - name: regcred
       containers:
-      - image: $IMAGE_NAME:$IMAGE_TAG
-        name: seataaccount
+      - image: pjhu/order:1.0
+        env:
+          - name: MYSQL_HOST
+            value: mysql
+        name: seataorder
 
 ---
 apiVersion: v1
@@ -33,16 +31,16 @@ kind: Service
 metadata:
   namespace: dev
   labels:
-    app: seataaccount
+    app: seataorder
     env: dev
-  name: seataaccount
+  name: seataorder
 spec:
   ports:
-  - name: seataaccount
+  - name: seataorder
     port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
-    app: seataaccount
+    app: seataorder
     env: dev
   type: ClusterIP

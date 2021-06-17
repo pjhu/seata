@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: dev
+  labels:
+    app: seataaccount
+  name: seataaccount
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seataaccount
+      env: dev
+  template:
+    metadata:
+      labels:
+        app: seataaccount
+        env: dev
+    spec:
+      containers:
+      - image: pjhu/account:1.0
+        env:
+          - name: MYSQL_HOST
+            value: mysql
+        name: seataaccount
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: dev
+  labels:
+    app: seataaccount
+    env: dev
+  name: seataaccount
+spec:
+  ports:
+  - name: seataaccount
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: seataaccount
+    env: dev
+  type: ClusterIP

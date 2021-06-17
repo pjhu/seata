@@ -1,0 +1,6 @@
+#!/bin/sh
+
+./gradlew -s clean bootJar
+
+docker build --build-arg jarName=build/libs/order-1.0.jar -t pjhu/order:1.0 .
+docker push pjhu/order:1.0
