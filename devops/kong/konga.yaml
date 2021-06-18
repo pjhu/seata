@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: konga
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: konga
+      env: dev
+  template:
+    metadata:
+      labels:
+        app: konga
+        env: dev
+    spec:
+      containers:
+      - image: pantsel/konga
+        name: konga
+        env:
+          - name: DB_ADAPTER
+            value: mysql
+          - name: DB_HOST
+            value: mysql
+          - name: DB_USER
+            value: root
+          - name: DB_PASSWORD
+            value: "123"
+          - name: DB_DATABASE
+            value: konga
+        ports:
+        - containerPort: 1337
+          protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: konga
+  name: konga-svc
+  namespace: dev
+spec:
+  ports:
+    - protocol: TCP
+      port: 1337
+      targetPort: 1337
+  selector:
+    app: konga
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  name: konga
+spec:
+  rules:
+  - host: konga.mydomain.com
+    http:
+      paths:
+      - backend:
+          serviceName: konga-svc
+          servicePort: 1337
+        path: /

@@ -44,3 +44,23 @@ spec:
     app: seataorder
     env: dev
   type: ClusterIP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: account-ingress
+  namespace: dev
+ 
+spec:
+  ingressClassName: kong
+  rules:
+  - http:
+      paths:
+      - path: /orders
+        pathType: Prefix
+        backend:
+          service:
+            name: seataorder
+            port:
+              number: 8080

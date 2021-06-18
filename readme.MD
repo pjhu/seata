@@ -114,9 +114,14 @@ k port-forward service/dashboard 9002:9002 -n dev
 ```
 
 # create database
+```mysql
 CREATE DATABASE `account` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 CREATE DATABASE `account_order` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 CREATE DATABASE `storage` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+insert into account(id, money) values(1, 10000);
+insert into storage(id, count) values(1, 10000);
+```
 
 
 # 创建image
@@ -125,4 +130,17 @@ CREATE DATABASE `storage` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_
 # 部署服务
 ```
 cd decvops/cicd
+k apply  -f account-deploy.yaml
+k apply -f order-deploy.yaml
+k apply -f storage-deploy.yaml
 ```
+
+# 部署kong
+https://docs.konghq.com/gateway-oss/2.4.x/kong-for-kubernetes/install/
+```
+k create namespace kong
+helm install -f myvalues.yaml kong kong/kong --set ingressController.installCRDs=false -n kong
+```
+
+
+kubectl get pods POD_NAME_HERE -o jsonpath='{.spec.containers[*].name}'

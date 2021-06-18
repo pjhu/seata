@@ -1,0 +1,32 @@
+deployment:
+  kong:
+    enabled: true
+    daemonset: false
+
+namespace: "kong"
+
+admin:
+  enabled: true
+  type: LoadBalancer
+
+  http:
+    enabled: true
+
+  tls:
+    enabled: false
+
+  ingress:
+    enabled: true
+
+proxy:
+  tls:
+    enabled: false
+
+dblessConfig:
+  # Either Kong's configuration is managed from an existing ConfigMap (with Key: kong.yml)
+  configMap: ""
+
+autoscaling:
+  enabled: ture
+  minReplicas: 2
+  maxReplicas: 2
