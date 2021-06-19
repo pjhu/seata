@@ -1,0 +1,30 @@
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: request-id
+config:
+  header_name: my-request-id
+plugin: correlation-id
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: echo-ingress-request
+  namespace: dev
+  annotations:
+    konghq.com/plugins: request-id
+ 
+spec:
+  ingressClassName: kong
+  rules:
+  - http:
+      paths:
+      - path: /bar
+        pathType: Prefix
+        backend:
+          service:
+            name: echo
+            port:
+              number: 80
