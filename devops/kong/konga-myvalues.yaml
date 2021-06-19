@@ -1,0 +1,25 @@
+nameOverride: "konga"
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+
+# Konga default configuration
+config: {}
+  port: 1337
+  db_adapter: mysql
+  db_uri: mysql
+  db_host: localhost
+  db_port: 3306
+  db_user: root
+  db_password: 123
+  db_database: konga
+
+# Ingress Configuration for Konga
+ingress:
+  enabled: true
+  annotations: {}
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"

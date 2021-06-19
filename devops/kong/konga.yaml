@@ -7,12 +7,12 @@ spec:
   selector:
     matchLabels:
       app: konga
-      env: dev
+      env: kong
   template:
     metadata:
       labels:
         app: konga
-        env: dev
+        env: kong
     spec:
       containers:
       - image: pantsel/konga
@@ -21,7 +21,7 @@ spec:
           - name: DB_ADAPTER
             value: mysql
           - name: DB_HOST
-            value: mysql
+            value: mysql.dev
           - name: DB_USER
             value: root
           - name: DB_PASSWORD
@@ -39,7 +39,7 @@ metadata:
   labels:
     app: konga
   name: konga-svc
-  namespace: dev
+  namespace: kong
 spec:
   ports:
     - protocol: TCP
@@ -47,6 +47,7 @@ spec:
       targetPort: 1337
   selector:
     app: konga
+  type: LoadBalancer
 ---
 kind: Ingress
 apiVersion: extensions/v1beta1
@@ -57,8 +58,7 @@ metadata:
   name: konga
 spec:
   rules:
-  - host: konga.mydomain.com
-    http:
+  - http:
       paths:
       - backend:
           serviceName: konga-svc

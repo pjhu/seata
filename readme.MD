@@ -147,8 +147,11 @@ k apply -f demo-plugin-ratelimit.yaml -n dev
 
 #### konga配置
 ```
-k apply -f konga.yaml -n dev
+k apply -f konga.yaml -n kong
 ```
+部署完后，打开localhost:1337
+创建用户 
+配置kong, 使用ip:8001可以激活，使用服务名没有激活
 
 # 部署seata服务
 #### 创建服务image
