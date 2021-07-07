@@ -3,27 +3,27 @@ kind: Deployment
 metadata:
   namespace: dev
   labels:
-    app: seatastorage
-  name: seatastorage
+    app: seatabusiness
+  name: seatabusiness
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: seatastorage
+      app: seatabusiness
       env: dev
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: seatastorage
+        app: seatabusiness
         env: dev
     spec:
       containers:
-      - image: pjhu/storage:1.0
+      - image: pjhu/business:1.0
         env:
           - name: MYSQL_HOST
             value: mysql
-        name: seatastorage
+        name: seatabusiness
 
 ---
 apiVersion: v1
@@ -31,17 +31,17 @@ kind: Service
 metadata:
   namespace: dev
   labels:
-    app: seatastorage
+    app: seatabusiness
     env: dev
-  name: seatastorage
+  name: seatabusiness
 spec:
   ports:
-  - name: seatastorage
+  - name: seatabusiness
     port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
-    app: seatastorage
+    app: seatabusiness
     env: dev
   type: ClusterIP
 
@@ -49,17 +49,18 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: storage-ingress
+  name: business-ingress
   namespace: dev
+ 
 spec:
   ingressClassName: kong
   rules:
   - http:
       paths:
-      - path: /storages
+      - path: /business
         pathType: Prefix
         backend:
           service:
-            name: seatastorage
+            name: seatabusiness
             port:
               number: 8080

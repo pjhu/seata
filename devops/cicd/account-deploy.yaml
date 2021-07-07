@@ -50,7 +50,6 @@ kind: Ingress
 metadata:
   name: account-ingress
   namespace: dev
- 
 spec:
   ingressClassName: kong
   rules:

@@ -49,9 +49,8 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: account-ingress
+  name: order-ingress
   namespace: dev
- 
 spec:
   ingressClassName: kong
   rules:

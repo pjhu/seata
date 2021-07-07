@@ -27,6 +27,9 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     // flyway migrate
     implementation 'org.flywaydb:flyway-core'
+
+    // seata
+    implementation 'io.seata:seata-spring-boot-starter:1.4.2'
     
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
