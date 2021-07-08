@@ -60,3 +60,15 @@ seata:
     consul:
       server-addr: consul-server.consul:8500
 #      server-addr: localhost:8500
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+        orm:
+          jpa:
+            JpaTransactionManager: DEBUG
+        transaction: DEBUG
+      hibernate: DEBUG
+debug: true

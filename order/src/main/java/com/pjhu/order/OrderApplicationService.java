@@ -4,6 +4,7 @@ import com.pjhu.order.adapter.AccountClient;
 import com.pjhu.order.adapter.AccountDecreaseCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -12,6 +13,7 @@ public class OrderApplicationService {
     private final AccountClient accountClient;
     private final OrderRepository orderRepository;
 
+    @Transactional
     public Long placeOrder(OrderPlaceCommand command) {
         Integer orderAmount = command.getProductCount() * 2;
 

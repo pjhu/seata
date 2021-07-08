@@ -225,3 +225,83 @@ k apply -f business-deploy.yaml
 kubectl get pods POD_NAME_HERE -o jsonpath='{.spec.containers[*].name}'
 ```
 
+
+
+
+
+
+# 遇到的问题
+
+#### 没有consul客户端
+```
+Bean 'configConsulProperties' of type [io.seata.spring.boot.autoconfigure.properties.config.ConfigConsulProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+Exception in thread "consul-config-executor_1_1" java.lang.NoClassDefFoundError: com/ecwid/consul/v1/ConsulClient
+```
+
+#### seata server 链接mysql 8.0没有驱动，默认是v5的驱动
+```
+Description:
+
+Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
+
+Reason: Failed to determine a suitable driver class
+```
+
+#### seata server 配置问题，导致business 不能注册到TC
+```
+cluster = "consul"
+dc = "localdc1"
+namespace = "seata"
+```
+
+注册成功会有如下消息
+```
+register TM success
+register RM success
+```
+#### 事物不能提交
+```
+mysql> show processlist;
++------+-----------------+-----------------+---------------+---------+--------+------------------------+------------------+
+| Id   | User            | Host            | db            | Command | Time   | State                  | Info             |
++------+-----------------+-----------------+---------------+---------+--------+------------------------+------------------+
+|    5 | event_scheduler | localhost       | NULL          | Daemon  | 172727 | Waiting on empty queue | NULL             |
+| 1107 | root            | localhost       | account       | Query   |      0 | init                   | show processlist |
+| 1108 | root            | 10.1.0.69:45980 | account       | Sleep   |   1030 |                        | NULL             |
+| 1109 | root            | 10.1.0.69:45994 | account       | Sleep   |   1380 |                        | NULL             |
+| 1110 | root            | 10.1.0.69:45996 | account       | Sleep   |   1380 |                        | NULL             |
+| 1111 | root            | 10.1.0.69:45998 | account       | Sleep   |   1380 |                        | NULL             |
+| 1112 | root            | 10.1.0.69:46000 | account       | Sleep   |   1380 |                        | NULL             |
+| 1113 | root            | 10.1.0.69:46002 | account       | Sleep   |   1380 |                        | NULL             |
+| 1114 | root            | 10.1.0.69:46004 | account       | Sleep   |   1380 |                        | NULL             |
+| 1115 | root            | 10.1.0.69:46006 | account       | Sleep   |   1380 |                        | NULL             |
+| 1116 | root            | 10.1.0.69:46008 | account       | Sleep   |   1380 |                        | NULL             |
+| 1117 | root            | 10.1.0.69:46010 | account       | Sleep   |   1379 |                        | NULL             |
+| 1118 | root            | 10.1.0.70:55586 | account_order | Sleep   |   1030 |                        | NULL             |
+| 1119 | root            | 10.1.0.70:55610 | account_order | Sleep   |   1333 |                        | NULL             |
+| 1120 | root            | 10.1.0.70:55612 | account_order | Sleep   |   1333 |                        | NULL             |
+| 1121 | root            | 10.1.0.70:55614 | account_order | Sleep   |   1333 |                        | NULL             |
+| 1122 | root            | 10.1.0.70:55618 | account_order | Sleep   |   1332 |                        | NULL             |
+| 1123 | root            | 10.1.0.70:55620 | account_order | Sleep   |   1332 |                        | NULL             |
+| 1124 | root            | 10.1.0.70:55624 | account_order | Sleep   |   1332 |                        | NULL             |
+| 1125 | root            | 10.1.0.70:55626 | account_order | Sleep   |   1332 |                        | NULL             |
+| 1126 | root            | 10.1.0.70:55628 | account_order | Sleep   |   1332 |                        | NULL             |
+| 1127 | root            | 10.1.0.70:55630 | account_order | Sleep   |   1332 |                        | NULL             |
+| 1128 | root            | 10.1.0.71:46644 | storage       | Sleep   |   1030 |                        | NULL             |
+| 1129 | root            | 10.1.0.71:46654 | storage       | Sleep   |   1292 |                        | NULL             |
+| 1130 | root            | 10.1.0.71:46656 | storage       | Sleep   |   1292 |                        | NULL             |
+| 1131 | root            | 10.1.0.71:46658 | storage       | Sleep   |   1292 |                        | NULL             |
+| 1132 | root            | 10.1.0.71:46660 | storage       | Sleep   |   1292 |                        | NULL             |
+| 1133 | root            | 10.1.0.71:46662 | storage       | Sleep   |   1292 |                        | NULL             |
+| 1134 | root            | 10.1.0.71:46664 | storage       | Sleep   |   1292 |                        | NULL             |
+| 1135 | root            | 10.1.0.71:46670 | storage       | Sleep   |   1292 |                        | NULL             |
+| 1136 | root            | 10.1.0.71:46674 | storage       | Sleep   |   1292 |                        | NULL             |
+| 1137 | root            | 10.1.0.71:46678 | storage       | Sleep   |   1292 |                        | NULL             |
+| 1138 | root            | 10.1.0.67:50164 | seata         | Sleep   |      1 |                        | NULL             |
+| 1139 | root            | 10.1.0.67:50422 | seata         | Sleep   |      1 |                        | NULL             |
+| 1140 | root            | 10.1.0.67:50636 | seata         | Sleep   |      1 |                        | NULL             |
+| 1141 | root            | 10.1.0.67:50768 | seata         | Sleep   |      1 |                        | NULL             |
+| 1142 | root            | 10.1.0.67:50882 | seata         | Sleep   |    944 |                        | NULL             |
++------+-----------------+-----------------+---------------+---------+--------+------------------------+------------------+
+37 rows in set (0.00 sec)
+```

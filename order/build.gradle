@@ -50,6 +50,7 @@ dependencies {
 
     // seata
     implementation 'io.seata:seata-spring-boot-starter:1.4.2'
+    implementation 'com.ecwid.consul:consul-api:1.4.5'
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
