@@ -40,6 +40,10 @@ spec:
     port: 8080
     protocol: TCP
     targetPort: 8080
+  - name: remotebusiness
+    port: 5005
+    protocol: TCP
+    targetPort: 5005
   selector:
     app: seatabusiness
     env: dev

@@ -25,12 +25,12 @@ public class BusinessApplicationService {
         ResponseEntity<Long> storageDecreaseResponse = storageClient.decreaseStorage(storageDecreaseCommand);
         log.info("storageDecreaseResponse: {}", storageDecreaseResponse);
 
-        OrderPlaceCommand orderPlaceCommand =
-                new OrderPlaceCommand(command.getUserId(), command.getProductId(), command.getCount());
-        ResponseEntity<Long> placeOrderResponse = orderClient.placeOrder(orderPlaceCommand);
-        log.info("placeOrderResponse: {}", placeOrderResponse);
+        // OrderPlaceCommand orderPlaceCommand =
+        //         new OrderPlaceCommand(command.getUserId(), command.getProductId(), command.getCount());
+        // ResponseEntity<Long> placeOrderResponse = orderClient.placeOrder(orderPlaceCommand);
+        // log.info("placeOrderResponse: {}", placeOrderResponse);
 
-        return placeOrderResponse.getBody();
+        return storageDecreaseResponse.getBody();
     }
 
     @GlobalTransactional(timeoutMills = 300000, name = "gts-seata-buy")
@@ -40,10 +40,10 @@ public class BusinessApplicationService {
         ResponseEntity<Long> storageDecreaseResponse = storageClient.decreaseStorage(storageDecreaseCommand);
         log.info("storageDecreaseResponse: {}", storageDecreaseResponse);
 
-        OrderPlaceCommand orderPlaceCommand =
-                new OrderPlaceCommand(command.getUserId(), command.getProductId(), command.getCount());
-        ResponseEntity<Long> placeOrderResponse = orderClient.placeOrder(orderPlaceCommand);
-        log.info("placeOrderResponse: {}", placeOrderResponse);
+        // OrderPlaceCommand orderPlaceCommand =
+        //         new OrderPlaceCommand(command.getUserId(), command.getProductId(), command.getCount());
+        // ResponseEntity<Long> placeOrderResponse = orderClient.placeOrder(orderPlaceCommand);
+        // log.info("placeOrderResponse: {}", placeOrderResponse);
         throw new RuntimeException("分布式事务回滚");
     }
 }

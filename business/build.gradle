@@ -45,10 +45,12 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
 	// seata
-	implementation 'io.seata:seata-spring-boot-starter:1.4.2'
+//	implementation 'io.seata:seata-spring-boot-starter:1.4.2'
+	implementation ('com.alibaba.cloud:spring-cloud-alibaba-seata:2.0.0.RELEASE') {
+		exclude group: 'io.seata', module: 'seata-all'
+	}
+	implementation 'io.seata:seata-all:1.4.2'
 	implementation 'com.ecwid.consul:consul-api:1.4.5'
-//	implementation 'com.alibaba.cloud:spring-cloud-alibaba-seata:1.5.1.RELEASE'
-//	implementation 'io.seata:seata-all'
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

@@ -43,12 +43,12 @@ public class DataSourceConfig {
         return new DataSourceProxy(master());
     }
 
-    @Bean
-    @Primary
-    public JpaTransactionManager transactionManager() {
-        log.debug("transaction start");
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setDataSource(dataSource());
-        return transactionManager;
-    }
+//    @Bean
+//    @Primary
+//    public JpaTransactionManager transactionManager() {
+//        log.debug("transaction start");
+//        JpaTransactionManager transactionManager = new JpaTransactionManager();
+//        transactionManager.setDataSource(dataSource());
+//        return transactionManager;
+//    }
 }

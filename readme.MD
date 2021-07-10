@@ -240,6 +240,13 @@ Exception in thread "consul-config-executor_1_1" java.lang.NoClassDefFoundError:
 
 #### seata server 链接mysql 8.0没有驱动，默认是v5的驱动
 ```
+could not be instantiated: Failed to load 
+driver class com.mysql.cj.jdbc.Driver in either of HikariConfig class loader or Thread 
+context classloader
+
+————————————————
+版权声明：本文为CSDN博主「appleyk」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/Appleyk/article/details/108934133
 Description:
 
 Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
@@ -259,7 +266,16 @@ namespace = "seata"
 register TM success
 register RM success
 ```
-#### 事物不能提交
+
+#### 内存不够会链接不上seata server
+```
+[eoutChecker_1_1] i.s.c.r.netty.NettyClientChannelManager  : no available service found in cluster 'shanghai', please make sure registry config correct and keep your seata server running
+
+```
+#### 事务提交后，会清楚seata数据库表中的日志
+```
+https://github.com/seata/seata/issues/3018
+```
 ```
 mysql> show processlist;
 +------+-----------------+-----------------+---------------+---------+--------+------------------------+------------------+

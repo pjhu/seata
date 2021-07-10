@@ -6,6 +6,8 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
   application:
     name: order-service
+  jpa:
+    show-sql: true
 
 seata:
   enabled: true

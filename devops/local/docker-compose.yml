@@ -1,0 +1,28 @@
+version: "3.5"
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    volumes: 
+      - /Users/twcn/work/pjhu/seata/devops/local/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=123
+    ports:
+      - 3306:3306
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_general_ci']
+  
+  seata:
+    image: seataio/seata-server:1.4.2
+    container_name: seata
+    volumes:
+      - /Users/twcn/work/pjhu/seata/devops/seata/mysql-connector-java-8.0.25.jar:/seata-server/libs/mysql-connector-java-8.0.25.jar 
+      - /Users/twcn/work/pjhu/seata/devops/local/consul-registry.conf:/root/seata-config/registry.conf
+    environment:
+      - STORE_MODE=db
+      - SEATA_PORT=8091
+      - SEATA_CONFIG_NAME=file:/root/seata-config/registry.conf
+    ports:
+      - 8091:8091
+    depends_on:
+      - mysql
