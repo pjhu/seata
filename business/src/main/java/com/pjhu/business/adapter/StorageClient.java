@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
-@FeignClient(name = "storage", url = "http://localhost:28080")
+@FeignClient(name = "storage", url = "http://seatastorage:8080")
 public interface StorageClient {
 
     @PostMapping("/storages/decrease")

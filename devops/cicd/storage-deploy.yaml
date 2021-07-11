@@ -55,6 +55,7 @@ kind: Ingress
 metadata:
   name: storage-ingress
   namespace: dev
+
 spec:
   ingressClassName: kong
   rules:
