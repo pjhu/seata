@@ -1,16 +1,5 @@
 # 切换到分支  local
 本地测试
-# 配置consul
-
-# 更换配置中心consul连接方式
-
-#### consul-registry.conf ip:port
-192.168.0.103:18500
-
-#### seata配置文件
-如果没有设置consul, 使用consul-file.conf文件，
-并mount到 / 目录下
-
 # 启动seata
 docker-compose up -d
 
@@ -20,15 +9,6 @@ docker-compose up -d
 
 #### 配置
 更换： server.port=28080
-
-注意file.conf文件中 vgroupMapping 必须为 spring.application.name 
-vgroupMapping.${spring.application.name}-fescar-service-group
-
-注意file.conf文件中 grouplist的写法，前面的“shanghai” 为vgroupMapping的值
-shanghai.grouplist = "localhost:8091"
-
-注意registry.conf文件 
-type都为file
 
 #### 启动后日志
 ```
@@ -44,15 +24,6 @@ type都为file
 
 #### 配置
 更换： server.port=18080
-
-注意file.conf文件中 vgroupMapping 必须为 spring.application.name 
-vgroupMapping.${spring.application.name}-fescar-service-group
-
-注意file.conf文件中 grouplist的写法，前面的“shanghai” 为vgroupMapping的值
-shanghai.grouplist = "localhost:8091"
-
-注意registry.conf文件 
-type都为file
 
 #### 启动后日志
 ```
