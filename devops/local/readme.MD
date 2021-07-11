@@ -1,4 +1,6 @@
-# 设置consul
+# 切换到分支  local
+本地测试
+# 配置consul
 
 # 更换配置中心consul连接方式
 
