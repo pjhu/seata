@@ -1,26 +1,28 @@
-# 配置k8s & consul
+# 本地直接启动服务测试
+[readme](https://github.com/pjhu/seata/tree/master/devops/local/readme.MD)
+# 本地配置k8s & consul
 [readme](https://github.com/pjhu/seata/tree/master/devops/consul/readme.MD)
-# 创建数据库
+### 创建数据库
 ```
 cd devops
 k apply -f cicd/mysql.yaml
 ```
 
-# 配置权限管理
+### 配置权限管理
 ```
 cd devops
 k apply -f cicd/role.yml
 ```
 
-# 配置 kong
+### 配置 kong
 [readme](https://github.com/pjhu/seata/tree/master/devops/kong/readme.MD)
-# 配置seata
+### 配置seata
 [readme](https://github.com/pjhu/seata/tree/master/devops/seata/readme.MD)
 
-# 创建服务image
+### 创建服务image
 执行 business / account / order / storage项目下的cis
 
-# 部署服务
+### 部署服务
 部署服务的示例: https://konghq.com/blog/kubernetes-ingress-api-gateway
 ```
 cd decvops/
@@ -31,10 +33,10 @@ k apply -f cicd/storage-deploy.yaml
 k apply -f cicd/business-deploy.yaml
 ```
 
-# 执行过程日志
+### 执行过程日志
 [readme](https://github.com/pjhu/seata/tree/master/devops/local/readme.MD)
 
-# 遇到的问题
+### 遇到的问题
 
 #### 没有consul客户端
 ```
