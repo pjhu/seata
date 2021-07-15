@@ -1,4 +1,4 @@
-# 切换到分支  local
+# 切换到分支 local
 本地测试
 # 启动seata & mysql
 docker-compose up -d
