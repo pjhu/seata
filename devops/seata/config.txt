@@ -1,4 +1,4 @@
-service.vgroupMapping.business-tx-group=shanghai
+service.vgroupMapping.business-tx-group=default
 store.mode=db
 store.db.datasource=hikari
 store.db.dbType=mysql

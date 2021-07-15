@@ -1,63 +1,4 @@
-# set up k8s 
-
-##### k8s 初始化后
-```
-➜  ~ docker images
-REPOSITORY                           TAG                                                     IMAGE ID       CREATED         SIZE
-docker/desktop-kubernetes            kubernetes-v1.21.2-cni-v0.8.5-critools-v1.17.0-debian   a502c6d66bd7   2 weeks ago     299MB
-k8s.gcr.io/kube-apiserver            v1.21.2                                                 106ff58d4308   2 weeks ago     126MB
-k8s.gcr.io/kube-proxy                v1.21.2                                                 a6ebd1c1ad98   2 weeks ago     131MB
-k8s.gcr.io/kube-scheduler            v1.21.2                                                 f917b8c8f55b   2 weeks ago     50.6MB
-k8s.gcr.io/kube-controller-manager   v1.21.2                                                 ae24db9aa2cc   2 weeks ago     120MB
-docker/desktop-storage-provisioner   v2.0                                                    99f89471f470   2 months ago    41.9MB
-k8s.gcr.io/pause                     3.4.1                                                   0f8457a4c2ec   5 months ago    683kB
-k8s.gcr.io/coredns/coredns           v1.8.0                                                  296a6d5035e2   8 months ago    42.5MB
-k8s.gcr.io/etcd                      3.4.13-0                                                0369cf4303ff   10 months ago   253MB
-
-
-➜  ~ k get svc -A
-NAMESPACE     NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)                  AGE
-default       kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP                  5m30s
-kube-system   kube-dns     ClusterIP   10.96.0.10   <none>        53/UDP,53/TCP,9153/TCP   5m28s
-
-
-➜  ~ k get deployments -A
-NAMESPACE     NAME      READY   UP-TO-DATE   AVAILABLE   AGE
-kube-system   coredns   2/2     2            2           5m41s
-
-
-➜  ~ k get pods -A
-NAMESPACE     NAME                                     READY   STATUS    RESTARTS   AGE
-kube-system   coredns-558bd4d5db-lldhm                 1/1     Running   0          5m27s
-kube-system   coredns-558bd4d5db-xv6q4                 1/1     Running   0          5m27s
-kube-system   etcd-docker-desktop                      1/1     Running   0          5m5s
-kube-system   kube-apiserver-docker-desktop            1/1     Running   0          4m38s
-kube-system   kube-controller-manager-docker-desktop   1/1     Running   0          3m55s
-kube-system   kube-proxy-wrqkp                         1/1     Running   0          5m27s
-kube-system   kube-scheduler-docker-desktop            1/1     Running   0          5m8s
-kube-system   storage-provisioner                      1/1     Running   0          5m1s
-kube-system   vpnkit-controller                        1/1     Running   0          5m1s
-```
-##### dashboard参考配置文档
-https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
-
-##### dashboard配置
-```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml
-kubectl proxy --port=8011
-```
-
-获取登录 token
-```
-kubectl -n kube-system describe secret deployment-controller-token-{}
-```
-
-打开网页
-http://localhost:8011/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
-
-
 # setup consul
-
 ##### 参考配置文档
 https://www.consul.io/docs/k8s/service-sync#sync-enable-disable
 https://www.consul.io/docs/k8s/dns
@@ -94,12 +35,10 @@ consul-webhook-cert-manager-config   1      101s
 consul.hashicorp.com                 0      80s
 kube-root-ca.crt                     1      2m38s
 ```
-
 ##### Viewing the Consul UI
 ```
 k port-forward service/consul-ui 18500:80 --address 0.0.0.0 -n consul
 ```
-
 ###### 配置dns
 ```
 k get svc consul-dns -o jsonpath='{.spec.clusterIP}' -n consul
@@ -134,5 +73,3 @@ k apply -f counting-dashboard-service.yaml
 k port-forward service/dashboard 9002:9002 -n dev
 打开网页 http://localhost:9002进行测试
 ```
-
-

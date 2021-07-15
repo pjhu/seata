@@ -18,8 +18,6 @@ docker-compose up -d
 2021-07-10 16:35:12.582  INFO 57439 --- [eoutChecker_1_1] i.s.c.rpc.netty.TmNettyRemotingClient    : register TM success. client version:1.4.2, server version:1.4.2,channel:[id: 0x63310dbf, L:/127.0.0.1:57419 - R:/127.0.0.1:8091]
 2021-07-10 16:35:12.582  INFO 57439 --- [eoutChecker_1_1] i.s.core.rpc.netty.NettyPoolableFactory  : register success, cost 12 ms, version:1.4.2,role:TMROLE,channel:[id: 0x63310dbf, L:/127.0.0.1:57419 - R:/127.0.0.1:8091]
 ```
-
-
 # 启动storage 服务
 
 #### 配置
@@ -37,11 +35,9 @@ docker-compose up -d
 2021-07-10 16:36:28.064  INFO 57799 --- [eoutChecker_2_1] i.s.core.rpc.netty.NettyPoolableFactory  : register success, cost 57 ms, version:1.4.2,role:RMROLE,channel:[id: 0xf9560585, L:/127.0.0.1:57436 - R:/127.0.0.1:8091]
 2021-07-10 16:36:28.064  INFO 57799 --- [eoutChecker_1_1] i.s.core.rpc.netty.NettyPoolableFactory  : register success, cost 57 ms, version:1.4.2,role:TMROLE,channel:[id: 0xa648812a, L:/127.0.0.1:57437 - R:/127.0.0.1:8091]
 ```
-
 # 执行buy，查看日志
 
 由于seata事物执行完，会删除seata个表中的数据，如果想查看，需要dubug
-
 #### business 日志
 ```
 2021-07-10 16:45:19.473 DEBUG 57439 --- [io-28080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/storages/decrease", parameters={}
@@ -75,7 +71,6 @@ Hibernate: update storage set count=? where id=?
 2021-07-10 16:45:19.861  INFO 57439 --- [h_RMROLE_1_4_24] io.seata.rm.AbstractRMHandler            : Branch committing: 10.1.0.126:8091:3053594002631459104 3053594002631459106 jdbc:mysql://localhost:3306/storage null
 2021-07-10 16:45:19.861  INFO 57439 --- [h_RMROLE_1_4_24] io.seata.rm.AbstractRMHandler            : Branch commit result: PhaseTwo_Committed
 ```
-
 #### storage日志
 ```
 2021-07-10 16:45:19.443 DEBUG 57799 --- [io-18080-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/business/buy", parameters={}
@@ -91,7 +86,6 @@ Hibernate: update storage set count=? where id=?
 2021-07-10 16:45:19.594 DEBUG 57799 --- [io-18080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 202 ACCEPTED
 ```
 
-
 #### storage undo_log表
 ```
 1
@@ -103,10 +97,7 @@ serializer=jackson&compressorType=NONE
 2021-07-10 16:38:43
 2021-07-10 16:38:43	
 ```
-
 # 执行buy-error，查看日志
-
-
 #### business 服务日志
 ```
 2021-07-10 16:46:19.761 DEBUG 57799 --- [io-18080-exec-8] o.s.web.servlet.DispatcherServlet        : POST "/business/buy-error", parameters={}
@@ -229,7 +220,6 @@ java.lang.RuntimeException: 分布式事务回滚
 2021-07-10 16:46:48.223 DEBUG 57799 --- [io-18080-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sat Jul 10 16:46:48 CST 2021, status=500, error=Internal Server Error, message=, path=/bu (truncated)...]
 2021-07-10 16:46:48.248 DEBUG 57799 --- [io-18080-exec-8] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 500
 ```
-
 #### storage 服务日志
 ```
 2021-07-10 16:46:19.814 DEBUG 57439 --- [io-28080-exec-9] o.s.web.servlet.DispatcherServlet        : POST "/storages/decrease", parameters={}

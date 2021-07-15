@@ -24,6 +24,6 @@ services:
       - STORE_MODE=db
       - SEATA_PORT=8091
     ports:
-      - 8091:8091
+      - 18091:8091
     depends_on:
       - mysql
