@@ -34,7 +34,7 @@ public class BusinessApplicationService {
     }
 
     @GlobalTransactional(timeoutMills = 300000, name = "gts-seata-buy")
-    public Long buyError(BusinessCommand command) {
+    public Long buyRollBack(BusinessCommand command) {
         StorageDecreaseCommand storageDecreaseCommand =
                 new StorageDecreaseCommand(command.getProductId(), command.getCount());
         ResponseEntity<Long> storageDecreaseResponse = storageClient.decreaseStorage(storageDecreaseCommand);

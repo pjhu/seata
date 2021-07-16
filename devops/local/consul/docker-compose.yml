@@ -2,7 +2,7 @@ version: "3.5"
 services:
   mysql:
     image: mysql:8.0
-    container_name: mysql
+    container_name: mysql-consul
     volumes: 
       - /Users/twcn/work/pjhu/seata/devops/local/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
@@ -14,11 +14,11 @@ services:
   
   seata:
     image: seataio/seata-server:1.4.2
-    container_name: seata
+    container_name: seata-consul
     volumes:
       - /Users/twcn/work/pjhu/seata/devops/seata/mysql-connector-java-8.0.25.jar:/seata-server/libs/mysql-connector-java-8.0.25.jar 
-      - /Users/twcn/work/pjhu/seata/devops/local/consul-registry.conf:/seata-server/resources/registry.conf
-      - /Users/twcn/work/pjhu/seata/devops/local/consul-file.conf:/seata-server/resources/file.conf
+      - /Users/twcn/work/pjhu/seata/devops/local/consul/registry.conf:/seata-server/resources/registry.conf
+      - /Users/twcn/work/pjhu/seata/devops/local/consul/file.conf:/seata-server/resources/file.conf
       
     environment:
       - STORE_MODE=db

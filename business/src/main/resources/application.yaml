@@ -1,3 +1,6 @@
+# uncomment when start local
+#server:
+#  port: 28080
 spring:
   application:
     name: business
@@ -51,15 +54,48 @@ seata:
 #    serialization: seata
 #    compressor: none
 #    enable-client-batch-send-request: true # 客户端事务消息请求是否批量合并发送（默认true）
+
+#  uncomment when run service on k8s
+#  registry:
+#    type: consul
+#    consul:
+#      server-addr:  consul-server.consul:8500
+#      cluster: consul
+#  config:
+#    type: consul
+#    consul:
+#      server-addr: consul-server.consul:8500
+
+#  uncomment when start service local
+#  if run in file type, just change type to file
+#  registry:
+#    type: consul
+#    consul:
+#      server-addr:  localhost:28500
+#      cluster: consul
+#  config:
+#    type: consul
+#    consul:
+#      server-addr: localhost:8500
   registry:
-    type: consul
-    consul:
-      server-addr:  consul-server.consul:8500
-      cluster: consul
+    type: nacos
+    nacos:
+      serverAddr: "localhost"
+      namespace: ""
+      group: "SEATA_GROUP"
+      cluster: ""
+      username: ""
+      password: ""
+      application: "seata-server"
   config:
-    type: consul
-    consul:
-      server-addr: consul-server.consul:8500
+    type: nacos
+    nacos:
+      serverAddr: "localhost"
+      namespace: ""
+      group: "SEATA_GROUP"
+      username: ""
+      password: ""
+      dataId: "seata.properties"
 
 logging:
   level:

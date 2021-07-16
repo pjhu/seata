@@ -21,9 +21,9 @@ public class BusinessController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(storage);
     }
 
-    @PostMapping("/buy-error")
-    public ResponseEntity<Object> buyError(@RequestBody BusinessCommand command) {
-        Long storage = businessApplicationService.buyError(command);
+    @PostMapping("/buy-rollback")
+    public ResponseEntity<Object> buyRollBack(@RequestBody BusinessCommand command) {
+        Long storage = businessApplicationService.buyRollBack(command);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(storage);
     }
 }

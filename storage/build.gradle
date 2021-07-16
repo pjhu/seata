@@ -21,24 +21,24 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
     runtimeOnly 'mysql:mysql-connector-java'
-    // flyway migrate
     implementation 'org.flywaydb:flyway-core'
 
     // seata
     implementation 'io.seata:seata-spring-boot-starter:1.4.2'
-    implementation 'io.seata:seata-spring-boot-starter:1.4.2'
     implementation ('com.alibaba.cloud:spring-cloud-starter-alibaba-seata:2.2.4.RELEASE') {
         exclude group: 'io.seata', module: 'seata-spring-boot-starter'
     }
+
+    // uncomment when config center & registry center is consul
     implementation 'com.ecwid.consul:consul-api:1.4.5'
-    
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
+
+    // uncomment when config center & registry center is nacos
+    compile 'com.alibaba.nacos:nacos-client:1.4.2'
 }
 
 test {
