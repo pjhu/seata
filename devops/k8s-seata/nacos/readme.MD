@@ -20,10 +20,6 @@ nacos/nacos
 sh nacos-config.sh -h localhost -g SEATA_GROUP
 ```
 
-
-
-
-
 ### 配置 kong
 [readme](https://github.com/pjhu/seata/tree/master/devops/kong/readme.MD)
 

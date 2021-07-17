@@ -19,7 +19,6 @@ services:
       - /Users/twcn/work/pjhu/seata/devops/seata/mysql-connector-java-8.0.25.jar:/seata-server/libs/mysql-connector-java-8.0.25.jar 
       - /Users/twcn/work/pjhu/seata/devops/local/consul/registry.conf:/seata-server/resources/registry.conf
       - /Users/twcn/work/pjhu/seata/devops/local/consul/file.conf:/seata-server/resources/file.conf
-      
     environment:
       - STORE_MODE=db
       - SEATA_PORT=8091

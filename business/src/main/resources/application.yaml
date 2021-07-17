@@ -1,6 +1,6 @@
 # uncomment when start local
-#server:
-#  port: 28080
+server:
+  port: 28080
 spring:
   application:
     name: business
@@ -36,7 +36,8 @@ seata:
 #    enable-degrade: false # 降级开关
 #    disable-global-transaction: false # 禁用全局事务（默认false）
     grouplist:
-      default: seata-server.seata:8091
+#      default: seata-server.seata:8091
+      default: localhost:18091
 #  transport:
 #    shutdown:
 #      wait: 3

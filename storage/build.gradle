@@ -38,7 +38,7 @@ dependencies {
     implementation 'com.ecwid.consul:consul-api:1.4.5'
 
     // uncomment when config center & registry center is nacos
-    compile 'com.alibaba.nacos:nacos-client:1.4.2'
+    implementation 'com.alibaba.nacos:nacos-client:1.4.2'
 }
 
 test {

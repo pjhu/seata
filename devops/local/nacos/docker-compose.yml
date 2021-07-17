@@ -1,19 +1,18 @@
 version: "3.5"
 services:
   mysql:
-    image: mysql:8.0
+    image: mysql:5.7
     container_name: mysql
     volumes: 
       - /Users/twcn/work/pjhu/seata/devops/local/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
-      - TZ=Asia/Shanghai
       - MYSQL_ROOT_PASSWORD=123
     ports:
       - 3306:3306
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_general_ci']
 
   nacos:
-    image: nacos/nacos-server:2.0.2
+    image: nacos/nacos-server:1.4.2
     container_name: nacos
     environment:
       - PREFER_HOST_MODE=hostname
@@ -24,29 +23,32 @@ services:
       - MYSQL_SERVICE_PORT=3306
       - MYSQL_SERVICE_USER=root
       - MYSQL_SERVICE_PASSWORD=123
-      - MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=10000&socketTimeout=3000&autoReconnect=true&useSSL=false
+      - MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=10000&socketTimeout=3000&autoReconnect=true&useSSL=false&serverTimezone=UTC
     volumes:
-      - ./init.d/custom.properties:/home/nacos/init.d/custom.properties
+      - ./custom.properties:/home/nacos/init.d/custom.properties
     ports:
       - 8848:8848
       - 9848:9848
       - 9555:9555
     depends_on:
       - mysql
+    restart: always
   
   seata:
     image: seataio/seata-server:1.4.2
     container_name: seata
     volumes:
-      - /Users/twcn/work/pjhu/seata/devops/seata/mysql-connector-java-8.0.25.jar:/seata-server/libs/mysql-connector-java-8.0.25.jar 
+      - /Users/twcn/work/pjhu/seata/devops/k8s-seata/mysql-connector-java-8.0.25.jar:/seata-server/libs/mysql-connector-java-8.0.25.jar 
       - /Users/twcn/work/pjhu/seata/devops/local/nacos/registry.conf:/seata-server/resources/registry.conf
-      - /Users/twcn/work/pjhu/seata/devops/local/nacos/file.conf:/seata-server/resources/file.conf     
+      - /Users/twcn/work/pjhu/seata/devops/local/nacos/file.conf:/seata-server/resources/file.conf
     environment:
-      - STORE_MODE=db
+      - SEATA_IP=192.168.0.104
       - SEATA_PORT=8091
+      - STORE_MODE=db
     ports:
-      - 18091:8091
+      - 8091:8091
     depends_on:
       - mysql
       - nacos
+    restart: always
 

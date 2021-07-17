@@ -1,12 +1,17 @@
-# 启动seata & mysql & nacos
+# 启动mysql & nacos & seata
 ```
-docker-compose up -d mysql
-
-docker-compose up -d seata  [需要mysql 初始化完成，再启动seata,不然会报错]
-
-docker-compose up -d nacos
+cd devops/local/nacos
+docker-compose up -d
 ```
 
+1. nacos启动前，需要初始化数据库，nacos没有初始化 【见init.sql】
+https://github.com/alibaba/nacos/blob/1.4.2/distribution/conf/nacos-mysql.sql
+
+2. 设置seata配置参数
+```
+cd devops/k8s-seata/nacos
+sh nacos-config.sh -h localhost -g SEATA_GROUP
+```
 # 启动business服务
 #### 更改配置
 1. server.port=28080

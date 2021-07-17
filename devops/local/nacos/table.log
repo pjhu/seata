@@ -1,0 +1,35 @@
+global_table
+18170414040240177	
+192.168.0.104:8091:18170414040240149	
+18170414040240149		
+jdbc:mysql://localhost:3306/storage	
+AT	
+0	
+storage-service:172.19.0.1:55634		
+2021-07-17 12:39:40.475659000	
+2021-07-17 12:39:40.475659000
+
+
+branch_table
+18170414040240177	
+192.168.0.104:8091:18170414040240149	
+18170414040240149		
+jdbc:mysql://localhost:3306/storage	
+AT	0	storage-service:172.19.0.1:55634	2021-07-17 12:39:40.475659000	2021-07-17 12:39:40.475659000
+
+
+lock_table
+jdbc:mysql://localhost:3306/storage^^^storage^^^1	
+192.168.0.104:8091:18170414040240149	
+18170414040240149	
+18170414040240177	
+jdbc:mysql://localhost:3306/storage	
+storage	1	2021-07-17 12:39:40	2021-07-17 12:39:40
+
+undo_log
+4	
+18170414040240177	
+192.168.0.104:8091:18170414040240149	
+serializer=jackson&compressorType=NONE	
+{"@class":"io.seata.rm.datasource.undo.BranchUndoLog","xid":"192.168.0.104:8091:18170414040240149","branchId":18170414040240177,"sqlUndoLogs":["java.util.ArrayList",[{"@class":"io.seata.rm.datasource.undo.SQLUndoLog","sqlType":"UPDATE","tableName":"storage","beforeImage":{"@class":"io.seata.rm.datasource.sql.struct.TableRecords","tableName":"storage","rows":["java.util.ArrayList",[{"@class":"io.seata.rm.datasource.sql.struct.Row","fields":["java.util.ArrayList",[{"@class":"io.seata.rm.datasource.sql.struct.Field","name":"id","keyType":"PRIMARY_KEY","type":-5,"value":["java.lang.Long",1]},{"@class":"io.seata.rm.datasource.sql.struct.Field","name":"count","keyType":"NULL","type":4,"value":9998}]]}]]},"afterImage":{"@class":"io.seata.rm.datasource.sql.struct.TableRecords","tableName":"storage","rows":["java.util.ArrayList",[{"@class":"io.seata.rm.datasource.sql.struct.Row","fields":["java.util.ArrayList",[{"@class":"io.seata.rm.datasource.sql.struct.Field","name":"id","keyType":"PRIMARY_KEY","type":-5,"value":["java.lang.Long",1]},{"@class":"io.seata.rm.datasource.sql.struct.Field","name":"count","keyType":"NULL","type":4,"value":9997}]]}]]}}]]}
+	0	2021-07-17 12:39:40	2021-07-17 12:39:40	
