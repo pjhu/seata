@@ -1,10 +1,10 @@
 version: "3.5"
 services:
   mysql:
-    image: mysql:8.0
+    image: mysql:5.7
     container_name: mysql-consul
     volumes: 
-      - /Users/twcn/work/pjhu/seata/devops/local/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - /Users/twcn/work/pjhu/seata/devops/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       - TZ=Asia/Shanghai
       - MYSQL_ROOT_PASSWORD=123
@@ -20,9 +20,10 @@ services:
       - /Users/twcn/work/pjhu/seata/devops/local/consul/registry.conf:/seata-server/resources/registry.conf
       - /Users/twcn/work/pjhu/seata/devops/local/consul/file.conf:/seata-server/resources/file.conf
     environment:
+      - SEATA_IP=192.168.0.104
       - STORE_MODE=db
       - SEATA_PORT=8091
     ports:
-      - 18091:8091
+      - 8091:8091
     depends_on:
       - mysql

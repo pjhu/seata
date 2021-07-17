@@ -3,7 +3,7 @@ store.mode=db
 store.db.datasource=hikari
 store.db.dbType=mysql
 store.db.driverClassName=com.mysql.jdbc.Driver
-store.db.url=jdbc:mysql://mysql.dev:3306/seata?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+store.db.url=jdbc:mysql://mysql:3306/seata?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
 store.db.user=root
 store.db.password=123
 store.db.minConn=5

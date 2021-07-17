@@ -58,7 +58,7 @@ spec:
             name: seata-server-config
         - name: mysql-connector-java-8
           hostPath:
-            path: /Users/twcn/work/pjhu/seata/devops/seata/mysql-connector-java-8.0.25.jar
+            path: /Users/twcn/work/pjhu/seata/mysql-connector-java-8.0.25.jar
 
 ---
 apiVersion: v1

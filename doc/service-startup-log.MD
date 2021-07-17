@@ -79,17 +79,6 @@ Hibernate: update storage set count=? where id=?
 2021-07-10 16:45:19.594 DEBUG 57799 --- [io-18080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 202 ACCEPTED
 ```
 
-#### storage undo_log表
-```
-1
-3053594002631458931
-10.1.0.126:8091:3053594002631458928
-serializer=jackson&compressorType=NONE
-{"@class":"io.seata.rm.datasource.undo.BranchUndoLog","xid":"10.1.0.126:8091:3053594002631458928","branchId":3053594002631458931,"sqlUndoLogs":["java.util.ArrayList",[{"@class":"io.seata.rm.datasource.undo.SQLUndoLog","sqlType":"UPDATE","tableName":"storage","beforeImage":{"@class":"io.seata.rm.datasource.sql.struct.TableRecords","tableName":"storage","rows":["java.util.ArrayList",[{"@class":"io.seata.rm.datasource.sql.struct.Row","fields":["java.util.ArrayList",[{"@class":"io.seata.rm.datasource.sql.struct.Field","name":"id","keyType":"PRIMARY_KEY","type":-5,"value":["java.lang.Long",1]},{"@class":"io.seata.rm.datasource.sql.struct.Field","name":"count","keyType":"NULL","type":4,"value":10000}]]}]]},"afterImage":{"@class":"io.seata.rm.datasource.sql.struct.TableRecords","tableName":"storage","rows":["java.util.ArrayList",[{"@class":"io.seata.rm.datasource.sql.struct.Row","fields":["java.util.ArrayList",[{"@class":"io.seata.rm.datasource.sql.struct.Field","name":"id","keyType":"PRIMARY_KEY","type":-5,"value":["java.lang.Long",1]},{"@class":"io.seata.rm.datasource.sql.struct.Field","name":"count","keyType":"NULL","type":4,"value":9999}]]}]]}}]]}
-0
-2021-07-10 16:38:43
-2021-07-10 16:38:43	
-```
 # 执行buy-error，查看日志
 #### business 服务日志
 ```
@@ -246,9 +235,4 @@ Hibernate: update storage set count=? where id=?
 2021-07-10 16:46:47.812  INFO 57439 --- [h_RMROLE_1_5_24] io.seata.rm.AbstractRMHandler            : Branch Rollbacking: 10.1.0.126:8091:3053594002631459110 3053594002631459112 jdbc:mysql://localhost:3306/storage
 2021-07-10 16:46:48.028  INFO 57439 --- [h_RMROLE_1_5_24] i.s.r.d.undo.AbstractUndoLogManager      : xid 10.1.0.126:8091:3053594002631459110 branch 3053594002631459112, undo_log deleted with GlobalFinished
 2021-07-10 16:46:48.031  INFO 57439 --- [h_RMROLE_1_5_24] io.seata.rm.AbstractRMHandler            : Branch Rollbacked result: PhaseTwo_Rollbacked
-```
-
-#### undo_log
-```
-5	3053594002631459112	10.1.0.126:8091:3053594002631459110	serializer=jackson&compressorType=NONE	{"@class":"io.seata.rm.datasource.undo.BranchUndoLog","xid":"10.1.0.126:8091:3053594002631459110","branchId":3053594002631459112,"sqlUndoLogs":["java.util.ArrayList",[{"@class":"io.seata.rm.datasource.undo.SQLUndoLog","sqlType":"UPDATE","tableName":"storage","beforeImage":{"@class":"io.seata.rm.datasource.sql.struct.TableRecords","tableName":"storage","rows":["java.util.ArrayList",[{"@class":"io.seata.rm.datasource.sql.struct.Row","fields":["java.util.ArrayList",[{"@class":"io.seata.rm.datasource.sql.struct.Field","name":"id","keyType":"PRIMARY_KEY","type":-5,"value":["java.lang.Long",1]},{"@class":"io.seata.rm.datasource.sql.struct.Field","name":"count","keyType":"NULL","type":4,"value":9996}]]}]]},"afterImage":{"@class":"io.seata.rm.datasource.sql.struct.TableRecords","tableName":"storage","rows":["java.util.ArrayList",[{"@class":"io.seata.rm.datasource.sql.struct.Row","fields":["java.util.ArrayList",[{"@class":"io.seata.rm.datasource.sql.struct.Field","name":"id","keyType":"PRIMARY_KEY","type":-5,"value":["java.lang.Long",1]},{"@class":"io.seata.rm.datasource.sql.struct.Field","name":"count","keyType":"NULL","type":4,"value":9995}]]}]]}}]]}	0	2021-07-10 16:46:20	2021-07-10 16:46:20	
 ```

@@ -1,5 +1,6 @@
 # nacos 启动报错
 需要在mysql参数加上 serverTimezone=UTC, 或者是因为mysql驱动引起，目前对mysql 8支持不好. 官方使用的是 nacos/nacos-mysql:8.0
+
 MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=10000&socketTimeout=3000&autoReconnect=true&useSSL=false&serverTimezone=UTC
 
 nacos    | org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLException: The connection property 'autoReconnect' acceptable values are: 'TRUE', 'FALSE', 'YES' or 'NO'. The value 'true?serverTimezone=UTC' is not acceptable.
