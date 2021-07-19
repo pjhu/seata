@@ -1,6 +1,6 @@
 # uncomment when start local
-server:
-  port: 28080
+#server:
+#  port: 28080
 spring:
   application:
     name: business
@@ -35,9 +35,8 @@ seata:
       business-tx-group: default # TC 集群（必须与seata-server保持一致）
 #    enable-degrade: false # 降级开关
 #    disable-global-transaction: false # 禁用全局事务（默认false）
-    grouplist:
-#      default: seata-server.seata:8091
-      default: localhost:18091
+#    grouplist:
+#      default: localhost:8091
 #  transport:
 #    shutdown:
 #      wait: 3
@@ -67,17 +66,6 @@ seata:
 #    consul:
 #      server-addr: consul-server.consul:8500
 
-#  uncomment when start service local
-#  if run in file type, just change type to file
-#  registry:
-#    type: consul
-#    consul:
-#      server-addr:  localhost:28500
-#      cluster: consul
-#  config:
-#    type: consul
-#    consul:
-#      server-addr: localhost:8500
   registry:
     type: nacos
     nacos:
@@ -100,6 +88,7 @@ seata:
 
 logging:
   level:
+    io.seata: DEBUG
     org:
       springframework:
         web: DEBUG

@@ -22,11 +22,3 @@ subjects:
 - kind: ServiceAccount
   name: default
   namespace: dev
-
----
-apiVersion: consul.hashicorp.com/v1alpha1
-kind: ServiceDefaults
-metadata:
-  name: seata
-spec:
-  protocol: "http"

@@ -5,19 +5,26 @@ docker-compose up -d mysql
 docker-compose up -d seata  [需要mysql 初始化完成，在启动seata,不然会报错]
 ```
 
-# 启动business服务
-#### 更改配置
-1. server.port=28080
-2. 将application.yaml registry /config type改为file，如果测试consul不需要改
+# 启动consul 
+- 查看文档 /devops/k8s-consul/readme.MD
+# 映射consul到本地
+```
+k port-forward statefulset/consul-server 8500:8500 --address 0.0.0.0 -n consul
+```
 
-# 启动storage服务
+# 配置seata/服务的参数到consul
+```
+sh consul-config.sh -h localhost -p 8500
+```
 
-#### 更改配置
-1. server.port=18080
-2. 将application.yaml registry /config type改为file，如果测试consul不需要改
+# 启动business服务，更改配置,编辑application.yaml
+- server.port=28080
+- 配置registry / config type为consul
+# 启动storage服务，更改配置,编辑application.yaml
+- server.port=18080
+- 配置registry / config type为consul
 
-
-# 执行分布式事务
+# 无法执行分布式事务, 上一步会启动失败
 ```
 curl --location --request POST 'http://localhost:28080/business/buy' \
 --header 'Content-Type: application/json' \
@@ -28,7 +35,7 @@ curl --location --request POST 'http://localhost:28080/business/buy' \
 }'
 ```
 
-
+# 无法执行分布式事务, 查看回滚状态
 ```
 curl --location --request POST 'http://localhost:28080/business/buy-rollback' \
 --header 'Content-Type: application/json' \
@@ -38,17 +45,3 @@ curl --location --request POST 'http://localhost:28080/business/buy-rollback' \
   "count": 1
 }'
 ```
-
-# 本地调试consul问题
-
-1. 查看文档启动文档 /devops/consul/readme.MD
-2. 映射到本地
-```
-k port-forward statefulset/consul-server 28500:8500 --address 0.0.0.0 -n consul
-```
-3. 更改配置，可调试链接consul加载慢的问题
-   取消注释 application.yaml中的reigstry / config为consul的部分
-
-   [consul 问题](https://github.com/pjhu/seata/tree/master/devops/k8s-seata/consul/readme.MD)
-
-4. 启动服务，执行分布式事务

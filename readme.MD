@@ -1,11 +1,11 @@
 # technical stack
-1. spring boot
-2. jpa
-3. seata
-4. consul
-5. nacos
-6. kong
-7. k8s
+- spring boot
+- jpa
+- seata
+- consul
+- nacos
+- kong
+- k8s
 
 # directory structure
 - accout [test service]

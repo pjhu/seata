@@ -1,7 +1,6 @@
 # 启动business 服务
 
-#### 配置
-更换： server.port=28080
+#### 更换配置： server.port=28080
 
 #### 启动后日志
 ```
@@ -13,8 +12,7 @@
 ```
 # 启动storage 服务
 
-#### 配置
-更换： server.port=18080
+#### 更换配置：server.port=18080
 
 #### 启动后日志
 ```
@@ -79,7 +77,7 @@ Hibernate: update storage set count=? where id=?
 2021-07-10 16:45:19.594 DEBUG 57799 --- [io-18080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 202 ACCEPTED
 ```
 
-# 执行buy-error，查看日志
+# 执行buy-rollback，查看日志
 #### business 服务日志
 ```
 2021-07-10 16:46:19.761 DEBUG 57799 --- [io-18080-exec-8] o.s.web.servlet.DispatcherServlet        : POST "/business/buy-error", parameters={}

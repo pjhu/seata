@@ -1,16 +1,15 @@
-# setup consul
-##### 参考配置文档
+# 参考配置文档
 https://www.consul.io/docs/k8s/service-sync#sync-enable-disable
 https://www.consul.io/docs/k8s/dns
 https://github.com/hashicorp/demo-consul-101/tree/master/k8s
 https://learn.hashicorp.com/tutorials/consul/service-mesh-deploy
 
-##### 安装
+# 安装
 ```
 kubectl create namespace consul
 helm install -f consul.yml consul hashicorp/consul --version "0.31.1"  -n consul
 ```
-##### 安装后
+# 安装后
 ```
 ➜  devops git:(master) ✗ k get service -n consul
 consul        consul-controller-webhook   ClusterIP   10.109.10.111   <none>        443/TCP                                                                   36s
@@ -35,11 +34,11 @@ consul-webhook-cert-manager-config   1      101s
 consul.hashicorp.com                 0      80s
 kube-root-ca.crt                     1      2m38s
 ```
-##### Viewing the Consul UI
+# Viewing the Consul UI
 ```
 k port-forward service/consul-ui 18500:80 --address 0.0.0.0 -n consul
 ```
-###### 配置dns
+# 配置dns
 ```
 k get svc consul-dns -o jsonpath='{.spec.clusterIP}' -n consul
 
@@ -52,17 +51,16 @@ k get svc consul-dns -o jsonpath='{.spec.clusterIP}' -n consul
    }
 ```
 
-###### 错误处理
+# 错误处理
 ```
 consul-sync-catalog-697b4f659b-tflfx 错误日志：
 Error getting leader status: Get "http://192.168.65.4:8500/v1/status/leader": dial tcp 192.168.65.4:8500: connect: no route to host
 
 修改dns配置后，删除dns的pod, 并不能使配置生效，需要重启mac docker desktop
-或执行下面的命令，删除pod
 kubectl get pods -n kube-system -oname |grep coredns |xargs kubectl delete -n kube-system
 ```
 
-###### 测试
+# 测试
 https://github.com/hashicorp/demo-consul-101/tree/master/k8s
 ```
 k create namespace dev

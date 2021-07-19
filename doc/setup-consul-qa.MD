@@ -31,15 +31,13 @@ io.seata.spring.boot.autoconfigure.properties.config.ConfigProperties
 
 ![服务加载consul bean非常慢](https://github.com/pjhu/seata/tree/master/connect-consul-slow.png) 
 
-### 遇到的问题
-
-#### 没有consul客户端
+# 没有consul客户端
 ```
 Bean 'configConsulProperties' of type [io.seata.spring.boot.autoconfigure.properties.config.ConfigConsulProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
 Exception in thread "consul-config-executor_1_1" java.lang.NoClassDefFoundError: com/ecwid/consul/v1/ConsulClient
 ```
 
-#### seata server 配置问题，导致business 不能注册到TC
+# seata server 配置问题，导致business 不能注册到TC
 ```
 cluster = "consul"
 dc = "localdc1"
@@ -62,7 +60,7 @@ register success, cost 310 ms, version:1.4.2,role:RMROLE,channel:[id: 0x6f2af96f
 register success, cost 10142 ms, version:1.4.2,role:TMROLE,channel:[id: 0x339ed68f, L:/10.1.0.73:57906 - R:/10.1.0.62:8091]
 ```
 
-#### 当删除 business 或 storage服务，会出现如下问题
+# 当删除 business 或 storage服务，会出现如下问题
 ```
 no available service found in cluster 'default', please make sure registry config correct and keep your seata server running
 ```
