@@ -16,7 +16,7 @@ services:
     image: seataio/seata-server:1.4.2
     container_name: seata-consul
     volumes:
-      - /Users/twcn/work/pjhu/seata/devops/seata/mysql-connector-java-8.0.25.jar:/seata-server/libs/mysql-connector-java-8.0.25.jar 
+      - /Users/twcn/work/pjhu/seata/devops/mysql-connector-java-8.0.25.jar:/seata-server/libs/mysql-connector-java-8.0.25.jar 
       - /Users/twcn/work/pjhu/seata/devops/local/consul/registry.conf:/seata-server/resources/registry.conf
       - /Users/twcn/work/pjhu/seata/devops/local/consul/file.conf:/seata-server/resources/file.conf
     environment:

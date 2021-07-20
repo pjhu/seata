@@ -57,20 +57,30 @@ seata:
   #   compressor: none
   #   enable-client-batch-send-request: true # 客户端事务消息请求是否批量合并发送（默认true）
   registry:
-    type: consul
-    consul:
-      server-addr:  consul-server.consul:8500
-      cluster: consul
+    type: nacos
+    nacos:
+      serverAddr: "nacos-headless.nacos"
+      namespace: ""
+      group: "SEATA_GROUP"
+      cluster: ""
+      username: ""
+      password: ""
+      application: "seata-server"
   config:
-    type: consul
-    consul:
-      server-addr: consul-server.consul:8500
+    type: nacos
+    nacos:
+      serverAddr: "nacos-headless.nacos"
+      namespace: ""
+      group: "SEATA_GROUP"
+      username: ""
+      password: ""
+      dataId: "seata.properties"
 
 logging:
   level:
+    io.seata: DEBUG
     org:
       springframework:
         web: DEBUG
         transaction: DEBUG
       hibernate: DEBUG
-debug: true
