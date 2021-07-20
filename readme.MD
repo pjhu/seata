@@ -35,4 +35,7 @@
 
 [consul方式setup & 问题](https://github.com/pjhu/seata/tree/master/devops/k8s-seata/consul/readme.MD)
 
-# seata + nacos
+# seata + nacos + k8s
+
+[nacos readme](https://github.com/pjhu/seata/tree/master/devops/k8s-nacos/readme.MD)
+

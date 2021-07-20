@@ -1,6 +1,6 @@
 # uncomment when start local
-server:
-  port: 18080
+# server:
+#   port: 18080
 spring:
   datasource:
     jdbcUrl: jdbc:mysql://${MYSQL_HOST:localhost}:3306/storage
@@ -64,7 +64,7 @@ seata:
   registry:
     type: nacos
     nacos:
-      serverAddr: "localhost"
+      serverAddr: "nacos-headless.nacos"
       namespace: ""
       group: "SEATA_GROUP"
       cluster: ""
@@ -74,7 +74,7 @@ seata:
   config:
     type: nacos
     nacos:
-      serverAddr: "localhost"
+      serverAddr: "nacos-headless.nacos"
       namespace: ""
       group: "SEATA_GROUP"
       username: ""
@@ -83,6 +83,7 @@ seata:
 
 logging:
   level:
+    io.seata: DEBUG
     org:
       springframework:
         web: DEBUG

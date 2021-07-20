@@ -69,7 +69,7 @@ seata:
   registry:
     type: nacos
     nacos:
-      serverAddr: "localhost"
+      serverAddr: "nacos-headless.nacos"
       namespace: ""
       group: "SEATA_GROUP"
       cluster: ""
@@ -79,7 +79,7 @@ seata:
   config:
     type: nacos
     nacos:
-      serverAddr: "localhost"
+      serverAddr: "nacos-headless.nacos"
       namespace: ""
       group: "SEATA_GROUP"
       username: ""

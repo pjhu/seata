@@ -38,3 +38,21 @@ k apply -f cicd/order-deploy.yaml
 k apply -f cicd/storage-deploy.yaml
 k apply -f cicd/business-deploy.yaml
 ```
+
+# 测试事务
+curl --location --request POST 'http://localhost:80/business/buy' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"userId": 1,
+	"productId": 1,
+    "count": 1
+}'
+
+# 测试事务回滚
+curl --location --request POST 'http://localhost:80/business/buy-rollback' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"userId": 1,
+	"productId": 1,
+  "count": 1
+}'
