@@ -1,10 +1,10 @@
 version: "3.5"
 services:
   mysql:
-    image: mysql:5.7
-    container_name: mysql-consul
+    image: mysql:8.0
+    container_name: mysql
     volumes: 
-      - /Users/twcn/work/pjhu/seata/devops/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ../../init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       - TZ=Asia/Shanghai
       - MYSQL_ROOT_PASSWORD=123
@@ -12,18 +12,65 @@ services:
       - 3306:3306
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_general_ci']
   
+  consul-server1:
+    image: hashicorp/consul:1.10.0
+    container_name: consul-server1
+    restart: always
+    volumes:
+      - ./server1.json:/consul/config/server1.json:ro
+      - ./certs/:/consul/config/certs/:ro
+    ports:
+      - "8500:8500"
+      - "8600:8600/tcp"
+      - "8600:8600/udp"
+    command: "agent -bootstrap-expect=3"
+
+  consul-server2:
+    image: hashicorp/consul:1.10.0
+    container_name: consul-server2
+    restart: always
+    volumes:
+      - ./server2.json:/consul/config/server2.json:ro
+      - ./certs/:/consul/config/certs/:ro
+    command: "agent -bootstrap-expect=3"
+
+  consul-server3:
+    image: hashicorp/consul:1.10.0
+    container_name: consul-server3
+    restart: always
+    volumes:
+      - ./server3.json:/consul/config/server3.json:ro
+      - ./certs/:/consul/config/certs/:ro
+    command: "agent -bootstrap-expect=3"
+
+  consul-client:
+    image: hashicorp/consul:1.10.0
+    container_name: consul-client
+    restart: always
+    volumes:
+      - ./client.json:/consul/config/client.json:ro
+      - ./certs/:/consul/config/certs/:ro
+    command: "agent"
+    depends_on:
+      - consul-server1
+      - consul-server2
+      - consul-server3
+  
   seata:
     image: seataio/seata-server:1.4.2
-    container_name: seata-consul
+    container_name: seata
     volumes:
-      - /Users/twcn/work/pjhu/seata/devops/mysql-connector-java-8.0.25.jar:/seata-server/libs/mysql-connector-java-8.0.25.jar 
-      - /Users/twcn/work/pjhu/seata/devops/local/consul/registry.conf:/seata-server/resources/registry.conf
-      - /Users/twcn/work/pjhu/seata/devops/local/consul/file.conf:/seata-server/resources/file.conf
+      - ../../mysql-connector-java-8.0.25.jar:/seata-server/libs/mysql-connector-java-8.0.25.jar 
+      - ./registry.conf:/seata-server/resources/registry.conf
+      - ./file.conf:/seata-server/resources/file.conf
     environment:
-      - SEATA_IP=192.168.0.104
+      - SEATA_IP=192.168.0.103
       - STORE_MODE=db
       - SEATA_PORT=8091
     ports:
       - 8091:8091
     depends_on:
       - mysql
+      - consul-server1
+      - consul-server2
+      - consul-server3

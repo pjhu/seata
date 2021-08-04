@@ -1,3 +1,6 @@
+# 目前该方式只支持注册中心，配置中心无法支持
+https://github.com/seata/seata/issues/3777
+https://juejin.cn/post/6976191318305275912
 # 配置 consul，使用consul作为seata的注册/配置中心
 
 # setup consul
@@ -45,8 +48,8 @@ sh consul-config.sh -h localhost -p 28500
 ```
 cd decvops/
 
-k apply -f cicd/account-deploy.yaml
-k apply -f cicd/order-deploy.yaml
+<!-- k apply -f cicd/account-deploy.yaml
+k apply -f cicd/order-deploy.yaml -->
 k apply -f cicd/storage-deploy.yaml
 k apply -f cicd/business-deploy.yaml
 ```

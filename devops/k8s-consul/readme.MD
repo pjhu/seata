@@ -38,6 +38,8 @@ kube-root-ca.crt                     1      2m38s
 ```
 k port-forward service/consul-ui 18500:80 --address 0.0.0.0 -n consul
 ```
+
+http://localhost:8500/
 # 配置dns
 ```
 k get svc consul-dns -o jsonpath='{.spec.clusterIP}' -n consul

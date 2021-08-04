@@ -33,8 +33,8 @@ k apply -f seata-server.yaml
 ```
 cd decvops/
 
-k apply -f cicd/account-deploy.yaml
-k apply -f cicd/order-deploy.yaml
+<!-- k apply -f cicd/account-deploy.yaml -->
+<!-- k apply -f cicd/order-deploy.yaml -->
 k apply -f cicd/storage-deploy.yaml
 k apply -f cicd/business-deploy.yaml
 ```

@@ -1,20 +1,27 @@
-# 启动seata & mysql
-```
-docker-compose up -d mysql
+# 目前该方式只支持注册中心，配置中心无法支持
+https://github.com/seata/seata/issues/3777
+https://juejin.cn/post/6976191318305275912
 
-docker-compose up -d seata  [需要mysql 初始化完成，在启动seata,不然会报错]
+# 参考文件
+https://github.com/hashicorp/learn-consul-docker/tree/main/datacenter-deploy-secure
+https://learn.hashicorp.com/tutorials/consul/docker-compose-datacenter
+# 启动seata & mysql & consul
+```
+docker-compose up -d
+[需要mysql 初始化完成，在启动seata,不然会报错]
 ```
 
-# 启动consul 
-- 查看文档 /devops/k8s-consul/readme.MD
-# 映射consul到本地
-```
-k port-forward statefulset/consul-server 8500:8500 --address 0.0.0.0 -n consul
-```
+# 打开consul控制台
 
+http://localhost:8500/
 # 配置seata/服务的参数到consul
 ```
 sh consul-config.sh -h localhost -p 8500
+```
+
+# 重启seata
+```
+docker-compose restart seata
 ```
 
 # 启动business服务，更改配置,编辑application.yaml
