@@ -6,7 +6,7 @@ https://github.com/nacos-group/nacos-k8s/blob/master/README-CN.md
 # setup
 ```
 k create namespace nacos
-k apply -f nacos-quick-start.yaml
+k apply -f k8s-nacos/nacos-no-pvc.yaml
 ```
 
 # 配置host

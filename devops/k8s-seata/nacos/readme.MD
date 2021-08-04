@@ -2,13 +2,13 @@
 # 创建数据库
 ```
 cd devops
-k apply -f cicd/mysql.yaml
+k apply -f k8s-cicd/mysql.yaml
 ```
 # 确认nacos/kong/seata 所需的database, talbe已经创建
 # 配置权限管理
 ```
 cd devops
-k apply -f cicd/role.yml
+k apply -f k8s-cicd/role.yml
 ```
 # 配置 kong
 [readme](https://github.com/pjhu/seata/tree/master/devops/kong/readme.MD)
@@ -18,6 +18,7 @@ k apply -f cicd/role.yml
 
 # 配置seata到nacos,配置在config.txt文件中
 ```
+cd k8s-seata/nacos
 sh nacos-config.sh -h web.nacos.com -p 80 -g SEATA_GROUP
 ```
 # 部署seata服务
