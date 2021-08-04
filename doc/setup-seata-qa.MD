@@ -2,6 +2,8 @@
 
 https://github.com/seata/seata/issues/2522
 
+本地更改环境变量 SEATA_IP=192.168.0.108
+
 # 调用api后， seata 表为空，undo_log为空
 seata在执行完事务后，会删除表中数据，如果需要查看，进入debug模式，打断点
 

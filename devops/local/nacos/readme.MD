@@ -6,9 +6,17 @@ docker-compose up -d
 # nacos启动前，需要初始化数据库，nacos没有初始化 【见devops/init.sql】
 https://github.com/alibaba/nacos/blob/1.4.2/distribution/conf/nacos-mysql.sql
 
+# 控制台链接
+
+http://127.0.0.1:8848/nacos/index.html
 # 设置seata配置参数, 然后重启seata
 ```
 sh nacos-config.sh -h localhost -g SEATA_GROUP
+```
+
+# 更改seata环境变量IP, 改为自己本地ip 
+```
+SEATA_IP=192.168.0.108
 ```
 # 启动business服务, 更改配置
 - server.port=28080

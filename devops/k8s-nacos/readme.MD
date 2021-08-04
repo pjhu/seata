@@ -10,7 +10,7 @@ k apply -f nacos-quick-start.yaml
 ```
 
 # 配置host
-/etc/host下加
+/etc/hosts下加
 ```
 127.0.0.1 web.nacos.com
 ```

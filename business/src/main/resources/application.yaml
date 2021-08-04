@@ -66,6 +66,26 @@ seata:
 #    consul:
 #      server-addr: consul-server.consul:8500
 
+#  registry:
+#    type: nacos
+#    nacos:
+#      serverAddr: "localhost"
+#      namespace: ""
+#      group: "SEATA_GROUP"
+#      cluster: ""
+#      username: ""
+#      password: ""
+#      application: "seata-server"
+#  config:
+#    type: nacos
+#    nacos:
+#      serverAddr: "localhost"
+#      namespace: ""
+#      group: "SEATA_GROUP"
+#      username: ""
+#      password: ""
+#      dataId: "seata.properties"
+
   registry:
     type: nacos
     nacos:

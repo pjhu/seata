@@ -1,10 +1,10 @@
 version: "3.5"
 services:
   mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     container_name: mysql
     volumes: 
-      - /Users/twcn/work/pjhu/seata/devops/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ../../init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       - MYSQL_ROOT_PASSWORD=123
     ports:
@@ -23,7 +23,8 @@ services:
       - MYSQL_SERVICE_PORT=3306
       - MYSQL_SERVICE_USER=root
       - MYSQL_SERVICE_PASSWORD=123
-      - MYSQL_SERVICE_DB_PARAM=characterEncoding=utf8&connectTimeout=10000&socketTimeout=3000&autoReconnect=true&useSSL=false&serverTimezone=UTC
+      - MYSQL_SERVICE_DB_PARAM=allowPublicKeyRetrieval=true&characterEncoding=utf8&connectTimeout=10000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC
+      - NACOS_DEBUG=y
     volumes:
       - ./custom.properties:/home/nacos/init.d/custom.properties
     ports:
@@ -38,11 +39,11 @@ services:
     image: seataio/seata-server:1.4.2
     container_name: seata
     volumes:
-      - /Users/twcn/work/pjhu/seata/devops/mysql-connector-java-8.0.25.jar:/seata-server/libs/mysql-connector-java-8.0.25.jar 
-      - /Users/twcn/work/pjhu/seata/devops/local/nacos/registry.conf:/seata-server/resources/registry.conf
-      - /Users/twcn/work/pjhu/seata/devops/local/nacos/file.conf:/seata-server/resources/file.conf
+      - ../../mysql-connector-java-8.0.25.jar:/seata-server/libs/mysql-connector-java-8.0.25.jar 
+      - ../../local/nacos/registry.conf:/seata-server/resources/registry.conf
+      - ../../local/nacos/file.conf:/seata-server/resources/file.conf
     environment:
-      - SEATA_IP=192.168.0.104
+      - SEATA_IP=192.168.0.108
       - SEATA_PORT=8091
       - STORE_MODE=db
     ports:

@@ -1,6 +1,6 @@
 # uncomment when start local
-# server:
-#   port: 18080
+#server:
+#  port: 18080
 spring:
   datasource:
     jdbcUrl: jdbc:mysql://${MYSQL_HOST:localhost}:3306/storage
@@ -61,6 +61,27 @@ seata:
 #    serialization: seata
 #    compressor: none
 #    enable-client-batch-send-request: true # 客户端事务消息请求是否批量合并发送（默认true）
+
+#  registry:
+#    type: nacos
+#    nacos:
+#      serverAddr: "localhost"
+#      namespace: ""
+#      group: "SEATA_GROUP"
+#      cluster: ""
+#      username: ""
+#      password: ""
+#      application: "seata-server"
+#  config:
+#    type: nacos
+#    nacos:
+#      serverAddr: "localhost"
+#      namespace: ""
+#      group: "SEATA_GROUP"
+#      username: ""
+#      password: ""
+#      dataId: "seata.properties"
+
   registry:
     type: nacos
     nacos:
