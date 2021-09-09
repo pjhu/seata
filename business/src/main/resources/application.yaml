@@ -1,6 +1,6 @@
 # uncomment when start local
-#server:
-#  port: 28080
+server:
+  port: 28080
 spring:
   application:
     name: business
@@ -66,30 +66,10 @@ seata:
 #    consul:
 #      server-addr: consul-server.consul:8500
 
-#  registry:
-#    type: nacos
-#    nacos:
-#      serverAddr: "localhost"
-#      namespace: ""
-#      group: "SEATA_GROUP"
-#      cluster: ""
-#      username: ""
-#      password: ""
-#      application: "seata-server"
-#  config:
-#    type: nacos
-#    nacos:
-#      serverAddr: "localhost"
-#      namespace: ""
-#      group: "SEATA_GROUP"
-#      username: ""
-#      password: ""
-#      dataId: "seata.properties"
-
   registry:
     type: nacos
     nacos:
-      serverAddr: "nacos-headless.nacos"
+      serverAddr: "localhost"
       namespace: ""
       group: "SEATA_GROUP"
       cluster: ""
@@ -99,18 +79,48 @@ seata:
   config:
     type: nacos
     nacos:
-      serverAddr: "nacos-headless.nacos"
+      serverAddr: "localhost"
       namespace: ""
       group: "SEATA_GROUP"
       username: ""
       password: ""
       dataId: "seata.properties"
 
+#  registry:
+#    type: nacos
+#    nacos:
+#      serverAddr: "nacos-headless.nacos"
+#      namespace: ""
+#      group: "SEATA_GROUP"
+#      cluster: ""
+#      username: ""
+#      password: ""
+#      application: "seata-server"
+#  config:
+#    type: nacos
+#    nacos:
+#      serverAddr: "nacos-headless.nacos"
+#      namespace: ""
+#      group: "SEATA_GROUP"
+#      username: ""
+#      password: ""
+#      dataId: "seata.properties"
+
 logging:
   level:
     io.seata: DEBUG
+    com:
+      pjhu:
+        business:
+          adapter: DEBUG
     org:
       springframework:
         web: DEBUG
         transaction: DEBUG
       hibernate: DEBUG
+
+feign:
+  client:
+    config:
+      storage:
+        loggerLevel: full

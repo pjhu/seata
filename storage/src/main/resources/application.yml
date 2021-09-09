@@ -1,6 +1,6 @@
 # uncomment when start local
-#server:
-#  port: 18080
+server:
+  port: 18080
 spring:
   datasource:
     jdbcUrl: jdbc:mysql://${MYSQL_HOST:localhost}:3306/storage
@@ -11,7 +11,9 @@ spring:
     name: storage
   jpa:
     show-sql: true
-
+    properties:
+      hibernate:
+        format_sql: true
 seata:
   enabled: true
   enableAutoDataSourceProxy: true
@@ -41,9 +43,9 @@ seata:
       business-tx-group: default # TC 集群（必须与seata-server保持一致）
 #    enable-degrade: false # 降级开关
 #    disable-global-transaction: false # 禁用全局事务（默认false）
-    grouplist:
+#    grouplist:
 #      default: seata-server.seata:8091
-      default: localhost:8091
+#      default: localhost:8091
 #  transport:
 #    shutdown:
 #      wait: 3
@@ -62,30 +64,10 @@ seata:
 #    compressor: none
 #    enable-client-batch-send-request: true # 客户端事务消息请求是否批量合并发送（默认true）
 
-#  registry:
-#    type: nacos
-#    nacos:
-#      serverAddr: "localhost"
-#      namespace: ""
-#      group: "SEATA_GROUP"
-#      cluster: ""
-#      username: ""
-#      password: ""
-#      application: "seata-server"
-#  config:
-#    type: nacos
-#    nacos:
-#      serverAddr: "localhost"
-#      namespace: ""
-#      group: "SEATA_GROUP"
-#      username: ""
-#      password: ""
-#      dataId: "seata.properties"
-
   registry:
     type: nacos
     nacos:
-      serverAddr: "nacos-headless.nacos"
+      serverAddr: "localhost"
       namespace: ""
       group: "SEATA_GROUP"
       cluster: ""
@@ -95,18 +77,44 @@ seata:
   config:
     type: nacos
     nacos:
-      serverAddr: "nacos-headless.nacos"
+      serverAddr: "localhost"
       namespace: ""
       group: "SEATA_GROUP"
       username: ""
       password: ""
       dataId: "seata.properties"
 
+#  registry:
+#    type: nacos
+#    nacos:
+#      serverAddr: "nacos-headless.nacos"
+#      namespace: ""
+#      group: "SEATA_GROUP"
+#      cluster: ""
+#      username: ""
+#      password: ""
+#      application: "seata-server"
+#  config:
+#    type: nacos
+#    nacos:
+#      serverAddr: "nacos-headless.nacos"
+#      namespace: ""
+#      group: "SEATA_GROUP"
+#      username: ""
+#      password: ""
+#      dataId: "seata.properties"
+
 logging:
   level:
     io.seata: DEBUG
+    com.pjhu.storage.config.RequestLoggingFilterConfig: DEBUG
     org:
       springframework:
         web: DEBUG
         transaction: DEBUG
-      hibernate: DEBUG
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE

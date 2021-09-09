@@ -43,7 +43,7 @@ services:
       - ../../local/nacos/registry.conf:/seata-server/resources/registry.conf
       - ../../local/nacos/file.conf:/seata-server/resources/file.conf
     environment:
-      - SEATA_IP=192.168.0.108
+      - SEATA_IP=192.168.0.103
       - SEATA_PORT=8091
       - STORE_MODE=db
     ports:
