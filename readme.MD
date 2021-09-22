@@ -44,3 +44,6 @@
 # 目前使用consul作为配置中心有问题
 https://github.com/seata/seata/issues/3777
 https://juejin.cn/post/6976191318305275912
+
+# 简书
+https://www.jianshu.com/p/c706307110fd

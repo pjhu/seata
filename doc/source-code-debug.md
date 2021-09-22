@@ -26,7 +26,7 @@ curl --location --request POST 'http://localhost:28080/business/buy' \
 ```
 
 2. 【Business服务】 @GlobalTransactional client端执行 
-
+```
 -> BusinessController调用BusinessApplicationService.buy
 -> 开启事务，拦截注解，GlobalTransactionalInterceptor::invoke 通过spring autoconfig 加载bean
 -> handleGlobalTransaction
@@ -39,10 +39,10 @@ curl --location --request POST 'http://localhost:28080/business/buy' \
 执行 client.execute，其中client是SeataFeignClient，替换了默认的client
 -> SeataFeignClient::execute
 -> SeataFeignClient::getModifyRequest <b>修改请求的header, 加上xid</b>
-
+```
 
 3. 【Storage 服务】@Transactional  client端执行 
-
+```
 -> Spring MVC 执行 SeataHandlerInterceptor，将xid 放入RootContext中
 -> StorageController::decreaseStorage调用storageApplicationService.decreaseStorage
 -> 拦截事务注解TransactionInterceptor.invoke
@@ -62,8 +62,9 @@ curl --location --request POST 'http://localhost:28080/business/buy' \
 -> ConnectionImpl::commit 跳出seata lib, 执行事务提交
 -> 执行成功，提交事务，持久化本服务的业务数据和undo log
 -> 执行失败，回滚事务, 回滚本服务的业务数据和undo log
-
+```
 4. 【Business服务】 @GlobalTransactional client端执行 
+```
 -> 如果下游服务执行失败，进行回滚TransactionalTemplate::completeTransactionAfterThrowing, 通知下游服务回滚
 -> AbstractNettyRemoting::processMessage (pair.getFirst().process(ctx, rpcMessage);)
 -> RmBranchCommitProcessor::process
@@ -88,3 +89,4 @@ curl --location --request POST 'http://localhost:28080/business/buy' \
 -> DataSourceManager::branchCommit
 -> AsyncWorker::branchCommit, addToCommitQueue, doBranchCommitSafely, doBranchCommit, dealWithGroupedContexts
 -> AsyncWorker::deleteUndoLog
+```
