@@ -7,6 +7,7 @@ https://learn.hashicorp.com/tutorials/consul/service-mesh-deploy
 # 安装
 ```
 kubectl create namespace consul
+helm repo add hashicorp https://helm.releases.hashicorp.com
 helm install -f consul.yml consul hashicorp/consul --version "0.31.1"  -n consul
 ```
 # 安装后
@@ -49,7 +50,7 @@ k get svc consul-dns -o jsonpath='{.spec.clusterIP}' -n consul
    consul {
      errors
      cache 30
-     forward . 10.109.200.205
+     forward . 10.111.6.189
    }
 ```
 
